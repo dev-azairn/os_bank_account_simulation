@@ -18,7 +18,7 @@ public abstract class BankAccount implements Transferable {
     
     public BankAccount(User accountOwner, String accountNo,
                        double initBalance, String accountType) {
-
+        System.out.println("[LOG] BankAccount constructor (User) called");
         this.accountOwner = accountOwner;
         this.accountNo = accountNo;
         this.balance = initBalance;
@@ -31,7 +31,7 @@ public abstract class BankAccount implements Transferable {
                        String telephoneNo, String address,
                        String accountNo, double initBalance,
                        String accountType) {
-
+        System.out.println("[LOG] BankAccount constructor (String) called");
         this.accountOwner = new User(citizenId, name, telephoneNo, address);
         this.accountNo = accountNo;
         this.balance = initBalance;
@@ -46,6 +46,7 @@ public abstract class BankAccount implements Transferable {
     //        if not joint account, set joint account and add joint user
     public boolean setJointAccount(boolean isJoint, ArrayList<User> jointList)
     {
+        System.out.println("[LOG] setJointAccount() method called");
         if (this.isJoint) {
             return false;
         }
@@ -62,50 +63,63 @@ public abstract class BankAccount implements Transferable {
         }
     // -------------------------------------------
     
-    protected abstract boolean validate();
-    protected abstract double getAmount();
+    protected abstract boolean validate(double amount);
     public abstract void earnInterest();
 
     // Task 3: implement deposit by add money, validation needed
     @Override
-    public boolean deposit() {
+    public boolean deposit(double amount) {
+        System.out.println("[LOG] deposit() method called with amount: " + amount);
         // implement here!
-        if (!validate()) {
+        if (!validate(amount)) {
             return false;
         }
-
         // สมมติ validate ตรวจจำนวนเงินเรียบร้อยแล้ว
-        balance += getAmount();
-
+        updateBalance(amount);
         return true;
     }
 
     // Task 4: implement withdraw by decrease money, validation needed
     @Override
-    public boolean withdraw() {
-    if (!validate()) {
+    public boolean withdraw(double amount) {
+    System.out.println("[LOG] withdraw() method called with amount: " + amount);
+    if (!validate(amount)) {
         return false;
     }
-
-    double amount = getAmount(); 
-
-    if (amount > balance) {
-        return false;
-    }
-
-    balance -= amount;
-
+    updateBalance(-amount);
     return true;
 }
 
-    // Task 5: implement getBalance to getBalance after validation
+    // Task 5: implement getBalance
     @Override
     public double getBalance() {
-        if (!validate()) {
-            return -1;   // validation ไม่ผ่าน
-        }
-
+        System.out.println("[LOG] getBalance() method called");
         return balance;
     }
-    
+
+    protected void updateBalance(double amount)
+    {
+        this.balance -= amount;
+    }
+    protected User getAccountOwner()
+    {
+        System.out.println("[LOG] getAccountOwner() method called");
+        return this.accountOwner;
+    }
+
+    protected String getAccountNo() {
+        return accountNo;
+    }
+
+    @Override
+    public String toString() {
+        System.out.println("[LOG] toString() method called in BankAccount");
+        return "BankAccount{" +
+                "owner=" + accountOwner.getName() +
+                ", accountNo='" + accountNo + '\'' +
+                ", balance=" + balance +
+                ", accountType='" + accountType + '\'' +
+                ", isJoint=" + isJoint +
+                '}';
+    }
 }
