@@ -4,20 +4,23 @@
 
 import java.util.Date;
 
-public class FixedDepositAccount extends BankAccount {
+public class FixedDepositAccount extends BankAccount 
+{
 
     private double interestRate;
     private Date endDate;
     private boolean interestPaid;
 
-    public FixedDepositAccount(User accoutOwner, String accountNo, double initBalance,  double interestRate, Date endDate) {
+    public FixedDepositAccount(User accoutOwner, String accountNo, double initBalance,  double interestRate, Date endDate) 
+    {
         super(accoutOwner, accountNo, initBalance, "FixedDepositAccount");
         System.out.println("[LOG] FixedDepositAccount constructor (User) called");
         this.interestRate = interestRate;
         this.endDate = endDate;
     }
 
-    public FixedDepositAccount(String citizenId, String name, String telephoneNo, String address, String accountNo, double initBalance, double interestRate, Date endDate) {
+    public FixedDepositAccount(String citizenId, String name, String telephoneNo, String address, String accountNo, double initBalance, double interestRate, Date endDate) 
+    {
         super(citizenId, name, telephoneNo, address, accountNo, initBalance, "FixedDepositAccount");
         System.out.println("[LOG] FixedDepositAccount constructor (String) called");
         this.interestRate = interestRate;
@@ -26,7 +29,8 @@ public class FixedDepositAccount extends BankAccount {
 
     // override all transactional method to be real life transaction
     @Override
-    public boolean deposit(double amount) {
+    public boolean deposit(double amount) 
+    {
         System.out.println("[LOG] deposit() method called in FixedDepositAccount with amount: " + amount);
         // implement here!
         System.out.println("Cannot deposit into Fixed Deposit account.");
@@ -34,12 +38,14 @@ public class FixedDepositAccount extends BankAccount {
     }
 
     @Override
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount) 
+    {
         System.out.println("[LOG] withdraw() method called in FixedDepositAccount with amount: " + amount);
         // implement here!
         Date today = new Date();
 
-        if (today.before(endDate)) {
+        if (today.before(endDate)) 
+        {
             System.out.println("Cannot withdraw before maturity date.");
             return false;
         }
@@ -49,7 +55,8 @@ public class FixedDepositAccount extends BankAccount {
     
     // force recursive
     @Override
-    public double getBalance() {
+    public double getBalance() 
+    {
         System.out.println("[LOG] getBalance() method called in FixedDepositAccount");
         if (validate()) { 
             return super.getBalance();
@@ -58,18 +65,21 @@ public class FixedDepositAccount extends BankAccount {
     }
 
     @Override
-    public boolean validate(double amount) {
+    public boolean validate(double amount) 
+    {
         System.out.println("[LOG] validate(double) method called in FixedDepositAccount with amount: " + amount);
         return amount < this.getBalance() && endDate.after(new Date());
     }
 
     // earn interest at end date and no more deposit
     @Override
-    public void earnInterest() {
+    public void earnInterest() 
+    {
         System.out.println("[LOG] earnInterest() method called in FixedDepositAccount");
         Date today = new Date();
 
-        if (!today.before(endDate) && !interestPaid) {
+        if (!today.before(endDate) && !interestPaid) 
+        {
 
             double interest = getBalance() * interestRate;
             super.deposit(interest);

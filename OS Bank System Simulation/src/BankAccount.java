@@ -3,8 +3,8 @@
 // Description:
 import java.util.ArrayList;
 
-public abstract class BankAccount implements Transferable {
-
+public abstract class BankAccount implements Transferable 
+{
     private User accountOwner;
     private String accountNo;
     private double balance;
@@ -16,8 +16,8 @@ public abstract class BankAccount implements Transferable {
     // ------------------------------------------
     
     
-    public BankAccount(User accountOwner, String accountNo,
-                       double initBalance, String accountType) {
+    public BankAccount(User accountOwner, String accountNo, double initBalance, String accountType) 
+    {
         System.out.println("[LOG] BankAccount constructor (User) called");
         this.accountOwner = accountOwner;
         this.accountNo = accountNo;
@@ -27,10 +27,8 @@ public abstract class BankAccount implements Transferable {
         this.jointUser = new ArrayList<>();
     }
 
-    public BankAccount(String citizenId, String name,
-                       String telephoneNo, String address,
-                       String accountNo, double initBalance,
-                       String accountType) {
+    public BankAccount(String citizenId, String name, String telephoneNo, String address, String accountNo, double initBalance, String accountType) 
+    {
         System.out.println("[LOG] BankAccount constructor (String) called");
         this.accountOwner = new User(citizenId, name, telephoneNo, address);
         this.accountNo = accountNo;
@@ -47,20 +45,12 @@ public abstract class BankAccount implements Transferable {
     public boolean setJointAccount(boolean isJoint, ArrayList<User> jointList)
     {
         System.out.println("[LOG] setJointAccount() method called");
-        if (this.isJoint) {
-            return false;
-        }
-
-        // ต้องตั้งเป็น true และมีรายชื่อ
-        if (!isJoint || jointList == null || jointList.isEmpty()) {
-            return false;
-        }
-
+        if (this.isJoint) return false;
+        if (!isJoint || jointList == null || jointList.isEmpty()) return false;
         this.isJoint = true;
         this.jointUser = new ArrayList<>(jointList);
-
         return true;
-        }
+    }
     // -------------------------------------------
     
     protected abstract boolean validate(double amount);
@@ -68,31 +58,34 @@ public abstract class BankAccount implements Transferable {
 
     // Task 3: implement deposit by add money, validation needed
     @Override
-    public boolean deposit(double amount) {
+    public boolean deposit(double amount) 
+    {
         System.out.println("[LOG] deposit() method called with amount: " + amount);
         // implement here!
-        if (!validate(amount)) {
-            return false;
-        }
-        // สมมติ validate ตรวจจำนวนเงินเรียบร้อยแล้ว
+        if (!validate(amount)) return false;
+        
+        // Assume that validation is finished!
         updateBalance(amount);
         return true;
     }
 
     // Task 4: implement withdraw by decrease money, validation needed
     @Override
-    public boolean withdraw(double amount) {
-    System.out.println("[LOG] withdraw() method called with amount: " + amount);
-    if (!validate(amount)) {
-        return false;
+    public boolean withdraw(double amount) 
+    {
+        System.out.println("[LOG] withdraw() method called with amount: " + amount);
+        if (!validate(amount)) 
+            {
+            return false;
+        }
+        updateBalance(-amount);
+        return true;
     }
-    updateBalance(-amount);
-    return true;
-}
 
     // Task 5: implement getBalance
     @Override
-    public double getBalance() {
+    public double getBalance() 
+    {
         System.out.println("[LOG] getBalance() method called");
         return balance;
     }
@@ -107,12 +100,14 @@ public abstract class BankAccount implements Transferable {
         return this.accountOwner;
     }
 
-    protected String getAccountNo() {
+    protected String getAccountNo() 
+    {
         return accountNo;
     }
 
     @Override
-    public String toString() {
+    public String toString() 
+    {
         System.out.println("[LOG] toString() method called in BankAccount");
         return "BankAccount{" +
                 "owner=" + accountOwner.getName() +

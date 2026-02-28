@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BankTester {
+public class BankTester 
+{
 
     // pre-defined users for account management
     public static final User user1 = new User("1234567890", "John Doe", "0812345678", "123 Main Street");
@@ -18,8 +19,10 @@ public class BankTester {
     private static boolean isQueueRunning = false;
     private static double todayInterest = 0.02;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception 
+    {
         System.out.println("[LOG] main() method started");
+        
         stackPointerAnalysis();
         heapAllocator();
         passingParameter();
@@ -91,7 +94,8 @@ public class BankTester {
         CurrentAccount account3 = new CurrentAccount(user3, "ACC3001", 10000.00);
         
         // 60 Transaction push in the queue
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) 
+        {
             pushTransactionQueue(new Transaction(account1, account2, 100 + i * 10));
             pushTransactionQueue(new Transaction(account2, account3, 80 + i * 5));
             pushTransactionQueue(new Transaction(account3, account1, 60 + i * 3));
@@ -106,10 +110,12 @@ public class BankTester {
         thread1.start();
         thread2.start();
 
-        try {
+        try 
+        {
             thread1.join();
             thread2.join();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e) 
+        {
             e.printStackTrace();
         }
 
@@ -118,6 +124,15 @@ public class BankTester {
         System.out.println(account2);
         System.out.println(account3);
         System.out.println("------------------------");
+        System.out.println("---- 1 Years Then ----");
+        account1.earnInterest();
+        account2.earnInterest();
+        account3.earnInterest();
+        System.out.println(account1);
+        System.out.println(account2);
+        System.out.println(account3);
+        System.out.println("------------------------");
+
 
         System.out.println("[LOG] realLifeShowcase() method finished");
     }
@@ -136,7 +151,8 @@ public class BankTester {
     // Helper function intentionally for StackOverflow which appear in getBalance and validation loop
     static void stackOverflowAddingTransaction()
     {
-        try {
+        try 
+        {
             System.out.println("[LOG] stackOverflowAddingTransaction() method started");
             CurrentAccount account1 = new CurrentAccount(user1, "1234567890", 15000.00);
             FixedDepositAccount account2 = new FixedDepositAccount(user1, "0123456789", 1500.00, todayInterest, new Date(2026, 06, 01));
@@ -149,10 +165,12 @@ public class BankTester {
         System.out.println("[LOG] stackOverflowAddingTransaction() method finished");
     }
 
-    public static void processTransactionQueue() {
+    public static void processTransactionQueue() 
+    {
         System.out.println("[LOG] processTransactionQueue() method started");
         isQueueRunning = true;
-        while (isQueueRunning) {
+        while (isQueueRunning) 
+        {
             System.out.println("Current Thread: " + Thread.currentThread().getName());
             Transaction currentTransaction = null;
             if (!queue.isEmpty()) currentTransaction = queue.poll();
@@ -162,9 +180,10 @@ public class BankTester {
             if (currentTransaction != null) currentTransaction.process();
         }
     }
-    
+
     // push transaction to the queue
-    public static void pushTransactionQueue(Transaction transaction) {
+    public static void pushTransactionQueue(Transaction transaction) 
+    {
         System.out.println("[LOG] pushTransactionQueue() method called");
         queue.add(transaction);
     }
