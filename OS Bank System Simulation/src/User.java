@@ -31,24 +31,28 @@ public class User
     {
         System.out.println("[LOG] setCitizenId() method called");
         this.citizenId = citizenId;
+        System.out.println("[LOG] setCitizenId() method finished");
     }
 
     public void setName(String name) 
     {
         System.out.println("[LOG] setName() method called with name: " + name);
         this.name = name;
+        System.out.println("[LOG] setName() method finished");
     }
 
     public void setTelephoneNo(String telephoneNo) 
     {
         System.out.println("[LOG] setTelephoneNo() method called");
         this.telephoneNo = telephoneNo;
+        System.out.println("[LOG] setTelephoneNo() method finished");
     }
 
     public void setAddress(String address) 
     {
         System.out.println("[LOG] setAddress() method called");
         this.address = address;
+        System.out.println("[LOG] setAddress() method finished");
     }
 
 
@@ -86,21 +90,26 @@ public class User
     {
         System.out.println("[LOG] addAccount() method called");
         accounts.add(account);
+        System.out.println("[LOG] addAccount() method finished");
     }
 
     public boolean validatePin(String pin)
     {
         System.out.println("[LOG] validatePin() method called");
-        return this.devicePin.equals(pin);
+        boolean result = this.devicePin.equals(pin);
+        System.out.println("[LOG] validatePin() method finished");
+        return result;
     }
 
     @Override
     public String toString() 
     {
         System.out.println("[LOG] toString() method called");
-        return "User [citizenId=" + citizenId +
+        String result = "User [citizenId=" + citizenId +
                ", name=" + name +
                ", telephoneNo=" + telephoneNo +
                ", address=" + address + "]";
+        System.out.println("[LOG] toString() method finished");
+        return result;
     }
 }

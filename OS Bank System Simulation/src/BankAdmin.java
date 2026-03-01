@@ -33,6 +33,7 @@ public class BankAdmin
         this.username = username;
         this.password = password;
         this.accessLevel = accessLevel;
+        System.out.println("[LOG] BankAdmin constructor finished");
     }
 
     public void setPassword(String newPassword, BankAdmin requester) 
@@ -41,6 +42,7 @@ public class BankAdmin
         if (requester.accessLevel == AccessLevel.ROOT || requester.accessLevel == AccessLevel.EDIT) 
             this.password = newPassword;
         else throw new SecurityException("Access denied");
+        System.out.println("[LOG] setPassword() method finished");
     }
 
     public void setAccessLevel(AccessLevel newLevel, BankAdmin requester) 
@@ -48,21 +50,25 @@ public class BankAdmin
         System.out.println("[LOG] setAccessLevel() method called with level: " + newLevel);
         if (requester.accessLevel == AccessLevel.ROOT || requester.accessLevel == AccessLevel.EDIT) this.accessLevel = newLevel;
         else throw new SecurityException("Access denied");
-        
+        System.out.println("[LOG] setAccessLevel() method finished");
     }
 
     public static boolean validateAdmin(String username, String password)
     {
         System.out.println("[LOG] validateAdmin() method called for user: " + username);
         for (BankAdmin admin : adminList) 
-            if (admin.username.equals(username) && admin.password.equals(password)) 
+            if (admin.username.equals(username) && admin.password.equals(password)) {
+                System.out.println("[LOG] validateAdmin() method finished");
                 return true;
+            }
+        System.out.println("[LOG] validateAdmin() method finished");
         return false;
     }
 
     public AccessLevel getAccessLevel() 
     {
         System.out.println("[LOG] getAccessLevel() method called");
+        System.out.println("[LOG] getAccessLevel() method finished");
         return accessLevel;
     }
 
@@ -70,9 +76,11 @@ public class BankAdmin
     public String toString() 
     {
         System.out.println("[LOG] toString() method called in BankAdmin");
-        return "BankAdmin{" +
+        String result = "BankAdmin{" +
                 "username='" + username + '\'' +
                 ", accessLevel=" + accessLevel +
                 '}';
+        System.out.println("[LOG] toString() method finished");
+        return result;
     }
 }

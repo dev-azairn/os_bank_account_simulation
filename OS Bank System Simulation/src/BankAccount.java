@@ -45,10 +45,17 @@ public abstract class BankAccount implements Transferable
     public boolean setJointAccount(boolean isJoint, ArrayList<User> jointList)
     {
         System.out.println("[LOG] setJointAccount() method called");
-        if (this.isJoint) return false;
-        if (!isJoint || jointList == null || jointList.isEmpty()) return false;
+        if (this.isJoint) {
+            System.out.println("[LOG] setJointAccount() method finished");
+            return false;
+        }
+        if (!isJoint || jointList == null || jointList.isEmpty()) {
+            System.out.println("[LOG] setJointAccount() method finished");
+            return false;
+        }
         this.isJoint = true;
         this.jointUser = new ArrayList<>(jointList);
+        System.out.println("[LOG] setJointAccount() method finished");
         return true;
     }
     // -------------------------------------------
@@ -62,10 +69,14 @@ public abstract class BankAccount implements Transferable
     {
         System.out.println("[LOG] deposit() method called with amount: " + amount);
         // implement here!
-        if (!validate(amount)) return false;
+        if (!validate(amount)) {
+            System.out.println("[LOG] deposit() method finished");
+            return false;
+        }
         
         // Assume that validation is finished!
         updateBalance(amount);
+        System.out.println("[LOG] deposit() method finished");
         return true;
     }
 
@@ -76,9 +87,11 @@ public abstract class BankAccount implements Transferable
         System.out.println("[LOG] withdraw() method called with amount: " + amount);
         if (!validate(amount)) 
             {
+            System.out.println("[LOG] withdraw() method finished");
             return false;
         }
         updateBalance(-amount);
+        System.out.println("[LOG] withdraw() method finished");
         return true;
     }
 
@@ -87,16 +100,21 @@ public abstract class BankAccount implements Transferable
     public double getBalance() 
     {
         System.out.println("[LOG] getBalance() method called");
+        double balance = this.balance;
+        System.out.println("[LOG] getBalance() method finished");
         return balance;
     }
 
     protected void updateBalance(double amount)
     {
-        this.balance -= amount;
+        System.out.println("[LOG] updateBalance() method called");
+        this.balance += amount;
+        System.out.println("[LOG] updateBalance() method called");
     }
     protected User getAccountOwner()
     {
         System.out.println("[LOG] getAccountOwner() method called");
+        System.out.println("[LOG] getAccountOwner() method finished");
         return this.accountOwner;
     }
 
@@ -109,12 +127,14 @@ public abstract class BankAccount implements Transferable
     public String toString() 
     {
         System.out.println("[LOG] toString() method called in BankAccount");
-        return "BankAccount{" +
+        String result = "BankAccount{" +
                 "owner=" + accountOwner.getName() +
                 ", accountNo='" + accountNo + '\'' +
                 ", balance=" + balance +
                 ", accountType='" + accountType + '\'' +
                 ", isJoint=" + isJoint +
                 '}';
+        System.out.println("[LOG] toString() method finished");
+        return result;
     }
 }

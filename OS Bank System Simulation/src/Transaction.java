@@ -24,30 +24,35 @@ public class Transaction
     public BankAccount getFrom() 
     {
         System.out.println("[LOG] getFrom() method called");
+        System.out.println("[LOG] getFrom() method finished");
         return from;
     }
 
     public BankAccount getTo() 
     {
         System.out.println("[LOG] getTo() method called");
+        System.out.println("[LOG] getTo() method finished");
         return to;
     }
 
     public double getAmount() 
     {
         System.out.println("[LOG] getAmount() method called");
+        System.out.println("[LOG] getAmount() method finished");
         return amount;
     }
 
     public boolean isValid() 
     {
         System.out.println("[LOG] isValid() method called");
+        System.out.println("[LOG] isValid() method finished");
         return isValid;
     }
 
     public State getState() 
     {
         System.out.println("[LOG] getState() method called");
+        System.out.println("[LOG] getState() method finished");
         return state;
     }
 
@@ -56,18 +61,21 @@ public class Transaction
     {
         System.out.println("[LOG] setAmount() method called with amount: " + amount);
         this.amount = amount;
+        System.out.println("[LOG] setAmount() method finished");
     }
 
     public void setValid(boolean isValid) 
     {
         System.out.println("[LOG] setValid() method called with isValid: " + isValid);
         this.isValid = isValid;
+        System.out.println("[LOG] setValid() method finished");
     }
 
     public void setState(State state) 
     {
         System.out.println("[LOG] setState() method called with state: " + state);
         this.state = state;
+        System.out.println("[LOG] setState() method finished");
     }
 
     public boolean process() 
@@ -80,6 +88,7 @@ public class Transaction
                 if (!this.isValid()) 
                 {
                     System.out.println("[LOG] Transaction is invalid, cannot process");
+                    System.out.println("[LOG] process() method finished");
                     return false;
                 }
                 
@@ -91,11 +100,13 @@ public class Transaction
                     this.getTo().deposit(this.getAmount());
                     this.setState(State.FINISH);
                     System.out.println("[LOG] Transaction processed successfully");
+                    System.out.println("[LOG] process() method finished");
                     return true;
                 } else 
                 {
                     this.setState(State.FAILED);
                     System.out.println("[LOG] Transaction failed - insufficient funds");
+                    System.out.println("[LOG] process() method finished");
                     return false;
                 }
             }
@@ -116,6 +127,7 @@ public class Transaction
                 if (!this.isValid()) 
                 {
                     System.out.println("[LOG] Transaction is invalid, cannot process");
+                    System.out.println("[LOG] process(double customAmount) method finished");
                     return false;
                 }
                 
@@ -123,6 +135,7 @@ public class Transaction
                 if (!this.getFrom().validate(customAmount) || !this.getTo().validate(customAmount)) 
                 {
                     System.out.println("[LOG] Custom amount validation failed");
+                    System.out.println("[LOG] process(double customAmount) method finished");
                     return false;
                 }
                 
@@ -135,11 +148,13 @@ public class Transaction
                     this.setState(State.FINISH);
                     System.out.println("[LOG] Transaction processed successfully with custom amount: " + customAmount);
                     // Try set custom amount = 0 to check with outside
+                    System.out.println("[LOG] process(double customAmount) method finished");
                     return true;
                 } else 
                 {
                     this.setState(State.FAILED);
                     System.out.println("[LOG] Transaction failed - insufficient funds for custom amount: " + customAmount);
+                    System.out.println("[LOG] process(double customAmount) method finished");
                     return false;
                 }
             }
@@ -158,12 +173,14 @@ public class Transaction
                 if (fromAccount == null || toAccount == null) 
                 {
                     System.out.println("[LOG] From or To account is null, cannot process");
+                    System.out.println("[LOG] process(BankAccount fromAccount, BankAccount toAccount) method finished");
                     return false;
                 }
                 
                 if (!this.isValid()) 
                 {
                     System.out.println("[LOG] Transaction is invalid, cannot process");
+                    System.out.println("[LOG] process(BankAccount fromAccount, BankAccount toAccount) method finished");
                     return false;
                 }
                 
@@ -171,6 +188,7 @@ public class Transaction
                 if (!fromAccount.validate(this.getAmount()) || !toAccount.validate(this.getAmount())) 
                 {
                     System.out.println("[LOG] Amount validation failed for provided accounts");
+                    System.out.println("[LOG] process(BankAccount fromAccount, BankAccount toAccount) method finished");
                     return false;
                 }
                 this.setState(State.EXECUTE);
@@ -180,11 +198,13 @@ public class Transaction
                     toAccount.deposit(this.getAmount());
                     this.setState(State.FINISH);
                     System.out.println("[LOG] Transaction processed successfully between alternate accounts");
+                    System.out.println("[LOG] process(BankAccount fromAccount, BankAccount toAccount) method finished");
                     return true;
                 } else 
                 {
                     this.setState(State.FAILED);
                     System.out.println("[LOG] Transaction failed - insufficient funds in provided from account");
+                    System.out.println("[LOG] process(BankAccount fromAccount, BankAccount toAccount) method finished");
                     return false;
                 }
             }
@@ -194,11 +214,13 @@ public class Transaction
     @Override
     public String toString() {
         System.out.println("[LOG] toString() method called in Transaction");
-        return "Transaction{" +
+        String result = "Transaction{" +
                 "from=" + from.getAccountNo() +
                 ", to=" + to.getAccountNo() +
                 ", amount=" + amount +
                 ", state=" + state +
                 '}';
+        System.out.println("[LOG] toString() method finished");
+        return result;
     }
 }

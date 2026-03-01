@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "BankTester",
+      "vmArgs": "-Xms32m -Xmx32m -XX:+UseParallelGC -XX:NewSize=16m -XX:MaxNewSize=16m -XX:SurvivorRatio=8 -Xlog:gc*,gc+heap=info"
+    }
+  ]
+}

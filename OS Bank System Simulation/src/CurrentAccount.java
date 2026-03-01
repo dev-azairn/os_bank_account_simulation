@@ -14,25 +14,29 @@ public class CurrentAccount extends BankAccount {
             interestRate = rate;
         else
             System.out.println("Cannot Access!!!!");
+        System.out.println("[LOG] setInterestRate() method finished");
     }
 
     public CurrentAccount(String citizenId, String name, String telephoneNo, String address, String accountNo, double initBalance) 
     {
         super(citizenId, name, telephoneNo, address, accountNo, initBalance, "CurrentAccount");
         System.out.println("[LOG] CurrentAccount constructor (String) called");
-        
+        System.out.println("[LOG] CurrentAccount constructor (String) finished");
     }
 
     public CurrentAccount( User accoutOwner, String accountNo, double initBalance) {
         super(accoutOwner, accountNo, initBalance, "Current Account");
         System.out.println("[LOG] CurrentAccount constructor (User) called");
+        System.out.println("[LOG] CurrentAccount constructor (User) finished");
     }
 
     @Override
     public double getBalance()
     {
         System.out.println("[LOG] getBalance() method called in CurrentAccount");
-        return super.getBalance();
+        double balance = super.getBalance();
+        System.out.println("[LOG] getBalance() method finished in CurrentAccount");
+        return balance;
     }
     
     // Task 1: validate according to real life current account
@@ -41,7 +45,9 @@ public class CurrentAccount extends BankAccount {
     {
         System.out.println("[LOG] validate() method called with amount: " + amount);
         // Checking if balance is at least 0 and the account owner is assigned
-        return amount < 50000;
+        boolean result = amount < 50000;
+        System.out.println("[LOG] validate() method finished");
+        return result;
     }
 
    
@@ -54,13 +60,15 @@ public class CurrentAccount extends BankAccount {
         // Interest earned = current balance * interest rate
         double interestEarned = this.getBalance() * interestRate;
         if (interestEarned > 0) this.deposit(interestEarned);
-        
+        System.out.println("[LOG] earnInterest() method finished");
     }
     // tostring
     @Override
     public String toString() 
     {
         System.out.println("[LOG] toString() method called in CurrentAccount");
-        return super.toString() + " [Type: Current Account, Interest Rate: " + (interestRate * 100) + "%]";
+        String result = super.toString() + " [Type: Current Account, Interest Rate: " + (interestRate * 100) + "%]";
+        System.out.println("[LOG] toString() method finished");
+        return result;
     }
 }
