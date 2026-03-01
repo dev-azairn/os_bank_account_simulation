@@ -44,7 +44,7 @@ public class BankTester
                 mode = scanner.nextInt();
                 switch (mode) {
                     case 1 -> tracingCallStack();
-                    case 2 -> stackOverflowAddingTransaction();
+                    case 2 -> stackOverflowTransaction();
                     case 3 -> tracingCallHeap();
                     case 4 -> reassignReference();
                     case 5 -> nullifyReference();
@@ -61,7 +61,7 @@ public class BankTester
         // Uncomment the below function for testing individual
 
         // tracingCallStack();
-        // stackOverflowAddingTransaction();
+        // stackOverflowTransaction();
         // tracingCallHeap();
         // reassignReference();
         // nullifyReference();
@@ -90,7 +90,7 @@ public class BankTester
     }
 
     // Task 1.2
-    static void stackOverflowAddingTransaction()
+    static void stackOverflowTransaction()
     {
         try 
         {
