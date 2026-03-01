@@ -2,6 +2,7 @@
 //Author: Piyapong Pongruang, Natthanita
 //Description: To demonstate following 3 tasks
 import java.util.Date;
+import java.util.Scanner;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,36 +27,36 @@ public class BankTester
         System.out.println("[LOG] LOADING - TODAY'S INTEREST.....");
         CurrentAccount.setInterestRate(CAINTEREST, "admin", "1234");
         SavingAccount.setInterestRate(SAINTEREST, "admin", "1234");
-        // Scanner scanner = new Scanner(System.in);
-        // int mode;
-        // do {
-        //     System.out.println("Welcome to Bank System Simulation");
-        //     System.out.println("1: Stack Pointer Analysis - Tracing Stack Call");
-        //     System.out.println("2: Stack Pointer Analysis - StackOverflow");
-        //     System.out.println("3: Heap Allocation - Tracing Call Heap");
-        //     System.out.println("4: Heap Allocation - Reassign Reference");
-        //     System.out.println("5: Heap Allocation - Nullify Reference");
-        //     System.out.println("6: Passing Primitive vs Reference Parameter");
-        //     System.out.println("7: String Immuability");
-        //     System.out.println("8: Scheduling and Concurrency Showcase");
-        //     System.out.println("9: Exit");
-        //     System.out.println("Select input: 1-9");
-        //     mode = scanner.nextInt();
-        //     switch (mode) {
-        //         case 1 -> tracingCallStack();
-        //         case 2 -> stackOverflowAddingTransaction();
-        //         case 3 -> tracingCallHeap();
-        //         case 4 -> reassignReference();
-        //         case 5 -> nullifyReference();
-        //         case 6 -> passingParameter();
-        //         case 7 -> stringImmune();
-        //         case 8 -> realLifeShowcase();
-        //         case 9 -> exit();
-        //         default -> System.out.println("Please type the availble input (1-9)!!!");
-        //     }
-        // } while (mode != 9);
-        // scanner.close();
-        // System.out.println("[LOG] main() method finished");
+        try (Scanner scanner = new Scanner(System.in)) {
+            int mode;
+            do {
+                System.out.println("Welcome to Bank System Simulation");
+                System.out.println("1: Stack Pointer Analysis - Tracing Stack Call");
+                System.out.println("2: Stack Pointer Analysis - StackOverflow");
+                System.out.println("3: Heap Allocation - Tracing Call Heap");
+                System.out.println("4: Heap Allocation - Reassign Reference");
+                System.out.println("5: Heap Allocation - Nullify Reference");
+                System.out.println("6: Passing Primitive vs Reference Parameter");
+                System.out.println("7: String Immuability");
+                System.out.println("8: Scheduling and Concurrency Showcase");
+                System.out.println("9: Exit");
+                System.out.println("Select input: 1-9");
+                mode = scanner.nextInt();
+                switch (mode) {
+                    case 1 -> tracingCallStack();
+                    case 2 -> stackOverflowAddingTransaction();
+                    case 3 -> tracingCallHeap();
+                    case 4 -> reassignReference();
+                    case 5 -> nullifyReference();
+                    case 6 -> passingParameter();
+                    case 7 -> stringImmune();
+                    case 8 -> realLifeShowcase();
+                    case 9 -> exit();
+                    default -> System.out.println("Please type the availble input (1-9)!!!");
+                }
+            } while (mode != 9);
+        }
+        System.out.println("[LOG] main() method finished");
 
         // Uncomment the below function for testing individual
 
@@ -65,7 +66,7 @@ public class BankTester
         // reassignReference();
         // nullifyReference();
         // passingParameter();
-        stringImmune();
+        // stringImmune();
         // realLifeShowcase();
         // exit();
     }
